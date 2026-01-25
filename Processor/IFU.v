@@ -4,12 +4,12 @@ module IFU(
     input clock,reset,
     output [31:0] Instruction_Code
 );
-reg [31:0] PC = 32'b0;
+reg [31:0] PC = 0;
 
     INST_MEM instr_mem(
-        .(PC)PC, 
-        .(reset)reset, 
-        .(Instruction_Code)Instruction_Code, 
+        .PC(PC), 
+        .reset(reset), 
+        .Instruction_Code(Instruction_Code), 
         .clock(clock)
         );
 

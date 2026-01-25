@@ -5,13 +5,29 @@ module INST_MEM(
     input clock
 );
     reg [7:0] Memory [64:0];
-
+    assign Instruction_Code = {Memory[PC+3],Memory[PC+2],Memory[PC+1],Memory[PC]};
     // Initializing memory when reset is one
-    always @(posedge clock or posedge reset)
-    begin
-        if(reset == 1)
+    always @(posedge reset)
         begin
-            Instruction_Code <= 0;
+		// 1. ADD: x3 = x1 + x2  (0x002081b3)
+    {Memory[3],Memory[2],Memory[1],Memory[0]}   <= 32'h002081b3;
+
+    // 2. NOP: (0x00000013) - Required to wait for Register Write-Back
+   // {Memory[7],Memory[6],Memory[5],Memory[4]}   <= 32'h00000013;
+
+    // 3. SUB: x5 = x3 - x4  (0x404182b3)
+    {Memory[7],Memory[6],Memory[5],Memory[4]} <= 32'h404182b3;
+
+    // 4. NOP: (0x00000013)
+    //{Memory[15],Memory[14],Memory[13],Memory[12]} <= 32'h00000013;
+
+    // 5. XOR: x7 = x5 ^ x6  (0x0062c3b3)
+    {Memory[11], Memory[10], Memory[9], Memory[8]} <= 32'h0061c3b3;
+    // 6. NOP: (0x00000013)
+    //{Memory[23],Memory[22],Memory[21],Memory[20]} <= 32'h00000013;
+    
+    // ... continue as needed
+		/*
             // Setting 32-bit instruction: add t1, s0,s1 => 0x00940333 
             Memory[3] <= 8'h00;
             Memory[2] <= 8'h94;
@@ -61,11 +77,8 @@ module INST_MEM(
             Memory[43] <= 8'h00;
             Memory[42] <= 8'h31;
             Memory[41] <= 8'h36;
-            Memory[40] <= 8'h33;                         
-
-        end else begin
-            Instruction_Code <= {Memory[PC+3],Memory[PC+2],Memory[PC+1],Memory[PC]};
-        end
-    end
+            Memory[40] <= 8'h33;
+	    */
+   	 end
 
 endmodule

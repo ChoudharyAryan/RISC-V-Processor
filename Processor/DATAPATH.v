@@ -20,6 +20,7 @@ module DATAPATH(
     reg [3:0] alu_control_reg; // Register to hold ALU control signals
     reg       regwrite_reg;      // Register to hold regwrite signal
     reg [4:0] write_reg_reg;   // Register to hold write register address
+	
     // Sequential logic to update control signals on clock edge
     always @(posedge clock or posedge reset) begin
         if (reset) begin

@@ -3,7 +3,7 @@ module CONTROL(
     input [2:0] funct3,
     input [6:0] opcode,
     output reg [3:0] alu_control,
-    output reg regwrite_control,
+    output reg regwrite_control
 );
     always @(*) begin
         if (opcode == 7'b0110011) begin // R-type instructions
@@ -20,7 +20,7 @@ module CONTROL(
                 1: alu_control = 4'b0011; // SLL
                 2: alu_control = 4'b1000; // SLT Set Less Than (Signed) 
                 3: alu_control = 4'b1001; // SLTU Set Less Than (Unsigned)
-				4: alu_control = 4'b0111; // XOR
+		4: alu_control = 4'b0111; // XOR
                 5: begin
                     if (funct7 == 32) begin
                         alu_control = 4'b1010; // SRA

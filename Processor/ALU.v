@@ -4,7 +4,6 @@ module ALU (
     output reg [31:0] alu_result,
     output reg zero_flag
 );
-    zero_flag =0;
 
     always @(*)
     begin

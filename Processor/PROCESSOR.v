@@ -1,3 +1,4 @@
+`timescale 1ns/1ns
 `include "CONTROL.v"
 `include "DATAPATH.v"
 `include "IFU.v"
@@ -15,7 +16,7 @@ module PROCESSOR(
     IFU IFU_module(
         .clock(clock), 
         .reset(reset), 
-        .instruction_code(instruction_code)
+        .Instruction_Code(instruction_code)
         );
 	
     CONTROL control_module(
@@ -23,7 +24,7 @@ module PROCESSOR(
         .funct3(instruction_code[14:12]), 
         .opcode(instruction_code[6:0]), 
         .alu_control(alu_control), 
-        .regwrite_control(regwrite), 
+        .regwrite_control(regwrite) 
         );
 	
     DATAPATH datapath_module(
